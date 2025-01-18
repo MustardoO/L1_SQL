@@ -1,0 +1,646 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage{setspace}	\singlespacing % Gère l'interlignage
+\usepackage[english,french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{enumitem} %enumitem plus complet que enumerate
+\usepackage{hyperref} %Pack pour les liens hypertexte
+	\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue}
+\usepackage{tcolorbox} % permet la création de cadre colorés
+\usepackage{graphicx}
+\usepackage{float} % Pour pouvoir utiliser H
+
+\title{TD3 Base de données : le langage SQL}	
+\author{Diagne Moustapha id°21011573}
+\date{\today}
+
+\setlength\parindent{0pt} % \noindent pour tout le doc
+
+\begin{document}
+	
+	%gainde@gainde-Inspiron-3505:~$ sudo -u postgres -i
+	%[sudo] Mot de passe de gainde : 
+	%postgres@gainde-Inspiron-3505:~$ psql
+	%psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1))
+	%Type "help" for help.
+	%postgres-# \c ma_bdd ---> \c permet de se connecter
+	%You are now connected to database "ma_bdd" as user "postgres".
+	
+	\maketitle
+	\pagebreak
+	
+	\section*{Exercice 1 : Création de tables}
+	
+	%\begin{tcolorbox}
+	%Énoncé :
+	%\tcblower
+	1. Créer la table EMP dont la clé est NoEMP et les attributs ont pour types :
+	
+	%\end{tcolorbox}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo1/Énoncé_table_exo1_question1}
+		\label{fig:enoncetableexo1question1}
+	\end{figure}
+
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo1/REPONSE_Creation_Table_exo1_question1}
+		\label{fig:reponsecreationtableexo1question1}
+	\end{figure}
+
+	2. Remplir cette table par les données suivantes :
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo1/Énoncé_table_exo1_question2}
+		\label{fig:enoncetableexo1question2}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo1/REPONSE_Creation_Table_exo1_question2}
+		\label{fig:reponsecreationtableexo1question2}
+	\end{figure}
+	
+	3. Créer la table DEPT dont la clé est NoDEPT et les attributs ont pour types :
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{Captures/Exo1/Énoncé_table_exo1_question3}
+		\label{fig:enoncetableexo1question3}
+	\end{figure}
+	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo1/REPONSE_Creation_Table_exo1_question3}
+		\label{fig:reponsecreationtableexo1question3}
+	\end{figure}
+	
+	4. Remplir cette table par les données suivantes :
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.35\linewidth]{Captures/Exo1/Énoncé_table_exo1_question4}
+		\label{fig:enoncetableexo1question4}
+	\end{figure}
+	
+	\begin{figure}[H]
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{Captures/Exo1/REPONSE_Creation_Table_exo1_question4-1}
+		\label{fig:reponsecreationtableexo1question4-1}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{Captures/Exo1/REPONSE_Creation_Table_exo1_question4-2}
+		%\caption{}
+		\label{fig:reponsecreationtableexo1question4-2}
+	\end{minipage}
+	\end{figure}
+
+	5. Faire en sorte que la clé étrangère soit correctement définie, après avoir défini et rempli les deux tables.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo1/REPONSE_Creation_Table_exo1_question5}
+		%\caption{}
+		\label{fig:reponsecreationtableexo1question5}
+	\end{figure}
+	
+	\bigskip
+	\section*{Exercice 2: Requêtes SQL simples}
+	
+	1. Afficher tous les tuples de la table EMP:
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo2/Rep1}
+		%\caption{}
+		\label{fig:rep1}
+	\end{figure}
+	
+	2. À partir du contenu de la table EMP afficher les noms et les emplois de tous.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{Captures/Exo2/Rep2}
+		%\caption{}
+		\label{fig:rep2}
+	\end{figure}
+	
+	3. Afficher les tuples correspondant au département 20 dans la table EMP.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo2/Rep3}
+		%\caption{}
+		\label{fig:rep3}
+	\end{figure}
+	
+	4. Rechercher et afficher les noms et salaires des employés exerçant en tant que vendeur et ayant une commission.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo2/Rep4}
+		%\caption{}
+		\label{fig:rep4}
+	\end{figure}
+	
+	5. Afficher tous les numéros de département. Est-il possible d’améliorer le contenu d’affichage ? Commenter.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo2/Rep5}
+		%\caption{}
+		\label{fig:rep5}
+	\end{figure}
+
+	Il est effectivement possible d'améliorer l'affichage en utilisant GROUP BY (supprime les doublons) et ORDER BY (pour le tri).\\
+	
+	6. Lister les gestionnaires. On ne s’intéressera qu’à leurs noms, leurs salaires et leurs commissions.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.45\linewidth]{Captures/Exo2/Rep6}
+		%\caption{}
+		\label{fig:rep6}
+	\end{figure}
+	
+	7. Déterminer la ville du département de ASMA.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo2/Rep7}
+		%\caption{}
+		\label{fig:rep7}
+	\end{figure}
+	
+	8. On s’intéresse aux employés gagnant entre 1000 e et 3000 e. Proposer une requête assurant cette tâche.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo2/Rep8}
+		%\caption{}
+		\label{fig:rep8}
+	\end{figure}
+	
+	9. Lister les noms des départements dont le nom de ville commence par R ou D.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{Captures/Exo2/Rep9}
+		%\caption{}
+		\label{fig:rep9}
+	\end{figure}
+		
+	10. Lister les noms des départements dont le nom de ville contient un R ou un D.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo2/Rep10}
+		%\caption{}
+		\label{fig:rep10}
+	\end{figure}
+	
+	11. Dans l’ordre décroissant des salaires, lister les noms, les fonctions et les salaires des employés gagnant moins de
+	3000 e.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{Captures/Exo2/Rep11}
+		%\caption{}
+		\label{fig:rep11}
+	\end{figure}
+	
+	12. Dans l’ordre décroissant des numéros des départements ensuite dans l’ordre croissant des salaires, lister les noms,
+	les fonctions, les salaires des employés et les numéros des départements.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Captures/Exo2/Rep12}
+		%\caption{}
+		\label{fig:rep12}
+	\end{figure}
+		
+	13. Dans l’ordre décroissant des noms des départements ensuite dans l’ordre croissant des salaires, lister les noms, les fonctions, les salaires des employés et les noms des départements.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{Captures/Exo2/Rep13}
+		%\caption{}
+		\label{fig:rep13}
+	\end{figure}
+	
+	\bigskip
+	\section*{Exercice 3: Création et mise à jour}
+	
+	1. On souhaite revaloriser le salaire de tous les employés de 200e chacun. Proposer l’instruction permettant de le faire sur la table EMP.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo3/1}
+		%\caption{}
+		\label{fig:1}
+	\end{figure}
+	
+	2. Insérer un nouveau tuple dans la table DEPT. Le contenu du tuple est laissé à votre choix.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{Captures/Exo3/2}
+		%\caption{}
+		\label{fig:2}
+	\end{figure}
+	
+	3. Écrire et exécuter l’instruction de création de la table COMMISSION dont les attributs sont :
+	
+	\begin{itemize}
+		\item[$(a)$] NomEmp de type chaîne de caractères (VARCHAR(10))
+		\item[$(b)$] Emploi de type chaîne de caractères (VARCHAR(10))
+		\item[$(c)$] Salaire de type réel (number(7,2))
+		\item[$(d)$] ValComm de type réel (Number(4,2))
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo3/3}
+		%\caption{}
+		\label{fig:3}
+	\end{figure}
+
+	4. Insérer plusieurs tuples dans cette table.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo3/4}
+		%\caption{}
+		\label{fig:4}
+	\end{figure}
+	
+	5. Supprimer de la table COMMISSION, le tuple correspondant à un nom d’employé (au choix).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo3/5}
+		%\caption{}
+		\label{fig:5}
+	\end{figure}
+	
+	6. Insérer dans cette table les données de la table EMP dont les employés ont une commission.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{Captures/Exo3/6}
+		%\caption{}
+		\label{fig:6}
+	\end{figure}	
+	
+	7. Vider la table COMMISSION ensuite supprimer là.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo3/7}
+		%\caption{}
+		\label{fig:7}
+	\end{figure}
+	
+	8. Recréer la table COMMISSION en y chargeant directement les données de la table EMP dont les employés ont une
+	commission.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo3/8}
+		%\caption{}
+		\label{fig:8}
+	\end{figure}
+	
+	\bigskip
+	\section*{Exercice 4: Fonctions d’agrégat, ANY, ALL, GROUP BY, HAVING, etc.}
+	
+	1. Lister le nombre d’employés gagnant plus que le minimum de tous les salaires.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_1}
+		%\caption{}
+		\label{fig:41}
+	\end{figure}
+		
+	2. Afficher le nombre de départements différents dans la table EMP.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_2}
+%		\caption{}
+		\label{fig:42}
+	\end{figure}
+	
+	3. Afficher le salaire moyen dans la table EMP
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Captures/Exo4/4_3}
+		\label{fig:43}
+	\end{figure}
+	
+	4. Lister tout employé dont le salaire est supérieur à au moins un salaire du département 30.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_4}
+%		\caption{}
+		\label{fig:44}
+	\end{figure}
+	
+	5. Lister tout employé du département 10 dont le salaire est supérieur à tous ceux du département 20.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_5}
+%		\caption{}
+		\label{fig:45}
+	\end{figure}
+	
+	6. Lister les salaires minimal et maximal pour chaque département.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_6}
+%		\caption{}
+		\label{fig:46}
+	\end{figure}
+
+	7. Lister le salaire moyen par emploi (EMPLOI).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_7}
+%		\caption{}
+		\label{fig:47}
+	\end{figure}
+	
+	8. Lister les salaires minimal et maximal pour chaque département ayant au moins 2 employés.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_8}
+%		\caption{}
+		\label{fig:48}
+	\end{figure}
+
+	9. Lister les départements ayant le minimum des salaires supérieur à la moyenne des salaires des employés de bureau
+	(FONCTIONNAIRE).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_9}
+%		\caption{}
+		\label{fig:49}
+	\end{figure}
+	
+	10. Donner les noms des employés par ordre alphabétique.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.35\linewidth]{Captures/Exo4/4_10}
+%		\caption{}
+		\label{fig:410}
+	\end{figure}
+	
+	11. Donner les noms des employés par ordre alphabétique inversé.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.35\linewidth]{Captures/Exo4/4_11}
+%		\caption{}
+		\label{fig:411}
+	\end{figure}
+	
+	12. Lister les noms des employés dont le nom de manager commence par un H ou un S ou un un M.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Captures/Exo4/4_12}
+%		\caption{}
+		\label{fig:412}
+	\end{figure}
+
+	13. Lister les noms des employés dont le nom de manager se termine par un E ou un M ou un un A.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{Captures/Exo4/4_13}
+%		\caption{}
+		\label{fig:413}
+	\end{figure}
+
+	14. Donner les informations sur les employés par ordre décroissant de date d’embauche puis par ordre alphabétique de
+	nom.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_14}
+%		\caption{}
+		\label{fig:414}
+	\end{figure}
+	
+	15. Présenter les employés par groupes de même valeur de salaire, et par ordre décroissant de ces valeurs.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.45\linewidth]{Captures/Exo4/4_15}
+%		\caption{}
+		\label{fig:415}
+	\end{figure}
+	
+	
+	16. Représenter les employés groupés selon les noms de département ordonnés dans l’ordre alphabétique inverse.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_16}
+%		\caption{}
+		\label{fig:416}
+	\end{figure}
+	
+	
+	17. Représenter les employés groupés selon le mois et l’année de leur date d’embauche (ordre chronologique).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_17}
+%		\caption{}
+		\label{fig:417}
+	\end{figure}
+	
+	18. Afficher le salaire moyen par job.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_18}
+%		\caption{}
+		\label{fig:418}
+	\end{figure}
+	
+	19. Afficher les noms des employés groupés par job puis par nom de département.
+	
+%	\begin{figure}[H]
+%		\centering
+%		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_19}
+%		\caption{}
+%		\label{fig:419}
+%	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{Captures/Exo4/4_19bis}
+%		\caption{}
+		\label{fig:419bis}
+	\end{figure}
+
+	20. Afficher les nombres d’employés dirigés directement par chaque manager (ici on comprend manager comme un employé ayant son numéro dans la colonne mgr).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_20}
+%		\caption{}
+		\label{fig:420}
+	\end{figure}
+
+	21. Afficher la ville et le nom des départements qui ont plus de quatre employés.
+	
+%	\begin{figure}[H]
+%		\centering
+%		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_21}
+%		\caption{}
+%		\label{fig:421}
+%	\end{figure}	
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.55\linewidth]{Captures/Exo4/4_21bis}
+%		\caption{}
+		\label{fig:421bis}
+	\end{figure}
+	
+	22. Afficher le nom des départements où les employés gagnent en moyenne plus de 2500e.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\linewidth]{Captures/Exo4/4_22}
+%		\caption{}
+		\label{fig:422}
+	\end{figure}
+	
+	23. Afficher le nombre d’employés par département et par profession.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo4/4_23}
+%		\caption{}
+		\label{fig:423}
+	\end{figure}
+	
+	24. Donner pour chaque département, son nom, le salaire minimum de ses employés, le salaire maximum, le salaire
+	moyen, le nombre d’employés, le nombre d’employés touchant une commission (éventuellement nulle) et le nombre
+	de jobs différents exercés dans ce département.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{Captures/Exo4/4_24}
+%		\caption{}
+		\label{fig:424}
+	\end{figure}
+	
+	\bigskip
+	\section*{Exercice 5: Autres aspects de SQL}	
+	
+	1. Créer une vue EMPDEPT qui contient la jointure naturelle des deux tables EMP et DEPT.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{Captures/Exo5/5_1}
+%		\caption{}
+		\label{fig:51}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{Captures/Exo5/5_1bis}
+%		\caption{}
+		\label{fig:51bis}
+	\end{figure}
+	
+	2. En utilisant cette vue, afficher les noms d’employés touchant plus que 2000 e avec leurs villes.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.45\linewidth]{Captures/Exo5/5_2}
+%		\caption{}
+		\label{fig:52}
+	\end{figure}
+	
+	3. Vider la table EMP.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo5/5_3}
+%		\caption{}
+		\label{fig:53}
+	\end{figure}
+	
+	4. Supprimer la table EMP.
+		
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo5/5_4}
+%		\caption{}
+		\label{fig:54}
+	\end{figure}
+	
+	5. Créer à nouveau la table EMP avec les mêmes attributs et les mêmes contraintes d’intégrité.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{Captures/Exo5/5_5}
+%		\caption{}
+		\label{fig:55}
+	\end{figure}
+	
+	6. Supprimer la colonne COMM.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo5/5_6}
+%		\caption{}
+		\label{fig:56}
+	\end{figure}
+	
+	7. Renommer la colonne COMM en BONUS.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Captures/Exo5/5_7}
+%		\caption{}
+		\label{fig:57}
+	\end{figure}
+	
+	
+	8. Ajouter une colonne à la table DEPT.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{Captures/Exo5/5_8}
+%		\caption{}
+		\label{fig:58}
+	\end{figure}
+	
+	
+	
+\end{document}
