@@ -1,0 +1,360 @@
+\documentclass[12pt,a4paper,french]{article}
+\usepackage{listings, tcolorbox}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\frenchbsetup{StandardLists=true}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listingsutf8}
+\usepackage{attachfile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries\sffamily}
+
+\lstset{language=sql,
+	extendedchars=true,
+	literate=
+	{à}{{\`a} }1
+	{é}{{\'e}}1
+	{è}{{\`e}}1
+	{-}{{\--}}1,
+	basicstyle=\sf,
+	columns=fullflexible,
+	keywordstyle=\color{black},
+	frame=single
+}
+
+\title{TD4 Base de données : La normalisation}
+\author{Diagne Moustapha id°21011573}
+\date{\today}
+
+\setlength\parindent{0pt} % \noindent pour tout le doc
+
+\begin{document}
+	
+	Le devoir est écrit en pl/pgsql (posgresql) au lieu de pl/sql (oracle).
+	
+	\section*{Exercice 1 : Blocs PL/SQL anonymes}
+	
+	1. Écrire un bloc PL/SQL calculant le maximum de deux nombres et le renvoie en sortie. \\
+		
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo1_1}
+	%\caption{}
+	\label{fig:exo11}
+\end{figure}	
+	
+	2. Écrire un bloc PL/SQL qui affiche le nombre d’employés d’un département dont le numéro est donné. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo1_2}
+	%\caption{}
+	\label{fig:exo12}
+\end{figure}	
+	
+	3. Créer une table NOMBRE ayant les deux attributs de type NUMBER, A et B.
+	— B est fonction de A \\
+	— Ecrire un bloc PL/SQL qui remplit cette table comme suit : \\
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			a & b \\
+			\hline
+			1 & 3 \\
+			\hline
+			2 & 6 \\
+			\hline
+			3 & 9 \\
+			\hline
+			4 & 12 \\
+			\hline
+			5 & 15 \\
+			\hline
+			... & ... \\
+			\hline
+			10 & 30 \\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+\begin{figure}[H]
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{../Captures/Exo1_3_1}
+		%\caption{}
+		\label{fig:exo131}
+	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{../Captures/Exo1_3_2}
+		%\caption{}
+		\label{fig:exo132}
+	\end{minipage}
+
+\end{figure}
+
+	4. Écrire un programme PL/SQL affichant le reste de la division de n par m sans utiliser la fonction modulo. \\
+	— Les nombres n et m sont deux entiers strictement positifs.\\
+	— Traiter le cas ou m vaut 0.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../Captures/Exo1_4_2}
+	%\caption{}
+	\label{fig:exo142}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo1_4_1}
+	%\caption{}
+	\label{fig:exo141}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo1_4_3}
+	%\caption{}
+	\label{fig:exo143}
+\end{figure}
+
+	5. On souhaite afficher pour un département dont le numéro est donné, le message : "Le département NOM se trouve à LOC".
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo1_5}
+	%\caption{}
+	\label{fig:exo15}
+\end{figure}
+	
+	\section*{Exercice 2: Procédures et fonctions}
+	
+	1. Écrire une fonction PL/SQL qui calcule et affiche n!. \\
+	— n est un entier et doit être considéré comme paramètre de la fonction \\
+	— Proposer une solution itérative et une solution récursive.\\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo2_1_1}
+	%\caption{}
+	\label{fig:exo211}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo2_1_2}
+	%\caption{}
+	\label{fig:exo212}
+\end{figure}
+	
+	
+	2. Écrire un programme PL/SQL qui contient les éléments suivants : \\
+	— Une fonction récursive fFactR (n in number) calculant n!. \\
+	— Une procédure pFact (n in number) qui appelle la fonction fFactR. \\
+	— Un bloc PL/SQL anonyme qui appelle la procédure pFact.\\
+	— n doit être lu en dehors de fFactR et de pFact.\\
+	
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo2_2_1}
+	%\caption{}
+	\label{fig:exo221}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo2_2_2}
+	%\caption{}
+	\label{fig:exo222}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{../Captures/Exo2_2_3}
+	%\caption{}
+	\label{fig:exo223}
+\end{figure}
+	
+	3. Proposer une procédure affichant les nombres de 1 à n. \\
+	— n est un entier et doit être considéré comme paramètre de la procédure \\
+	— Proposer deux façons de tester le fonctionnement de cette procédure. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo2_3_1}
+	%\caption{}
+	\label{fig:exo231}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo2_3_2}
+	%\caption{}
+	\label{fig:exo232}
+\end{figure}
+	
+	4. Proposer une fonction qui calcule et renvoie 2n + m$^2$ . \\
+	— n et m sont des entiers et doivent être considérés comme paramètres de la fonction.\\
+	— Aucune autre variable ne doit être déclarée.\\
+	— Proposer deux façons de tester le fonctionnement de cette fonction.\\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo2_4}
+	%\caption{}
+	\label{fig:exo24}
+\end{figure}
+	
+	5. Écrire un programme PL/SQL qui contient les éléments suivants : \\
+	— Une procédure pAug(nEmp number, tAug number) augmentant de tAug\% le salaire de l’employé identifié par nEmp. \\
+	— Un bloc PL/SQL anonyme qui appelle la procédure pAug. \\
+	— nEmp et tAug doivent être lus en dehors de pAug. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo2_5}
+	%\caption{}
+	\label{fig:exo25}
+\end{figure}
+	
+	\section*{Exercice 3: Utilisation de curseurs}
+	
+	1. Écrire un bloc PL/SQL affichant le nombre de départements dont aucun employé ne touche une commission. Un département possédant un ou plusieurs employés ayant une commission >0 ne doit pas être considéré. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_1}
+	%\caption{}
+	\label{fig:exo31}
+\end{figure}
+	
+	2. Écrire un bloc PL/SQL affichant le nombre de départements dont tous les employés touchent un salaire supérieur à 2000e. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_2}
+	%\caption{}
+	\label{fig:exo32}
+\end{figure}
+	
+	3. Proposer un bloc PL/SQL qui affiche les noms des départements qui existent dans les deux tables EMP et DEPT. \\	
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_3}
+	%\caption{}
+	\label{fig:exo33}
+\end{figure}
+	
+	4. Proposer un bloc PL/SQL qui affiche le résultat suivant : NDEPT NOMEMP MS1 MS2 \\
+	Avec :\\
+	— NDEPT : nom du département\\
+	— NOMBEMP : nombre d’employés\\
+	— MS1 est la moyenne des salaires par département. Seuls les salaires inférieurs ou égaux à 2500e sont à considérer.\\
+	— MS2 est la moyenne des salaires par département. Seuls les salaires supérieurs à 2500e sont à considérer.\\
+	— Seuls les employés n’ayant pas de commission sont à considérer. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_4_1}
+	%\caption{}
+	\label{fig:exo341}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_4_2}
+	%\caption{}
+	\label{fig:exo342}
+\end{figure}
+
+	5. Proposer un bloc PL/SQL affichant les noms des employés du département "VENTES" dont le salaire > 1400 e. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_5}
+	%\caption{}
+	\label{fig:exo35}
+\end{figure}
+	
+	
+	6. Proposer un bloc PL/SQL permettant de recopier le contenu de la table EMP avec augmentation de la commission de 50\% dans la table EMPBIS possédant le même schéma que EMP. On suppose que la table EMPBIS existe et est vide. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo3_6_1}
+	%\caption{}
+	\label{fig:exo361}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_6_2}
+	%\caption{}
+	\label{fig:exo362}
+\end{figure}
+	
+	7. Proposer un bloc PL/SQL qui vérifie à partir de son nom donné, l’existence d’un département (par son numéro) dans
+	la table EMP. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo3_7}
+	%\caption{}
+	\label{fig:exo37}
+\end{figure}
+	
+	\section*{Exercice 4: Déclencheurs/Triggers}
+	
+	1. On souhaite interdire toute opération n’ayant pas pour objet la simple consultation de la table DEPT après 17H00. Proposer un déclencheur assurant cette tâche. \\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../Captures/Exo4_1}
+	%\caption{}
+	\label{fig:exo41}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo4_1_2}
+	%\caption{}
+	\label{fig:exo412}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../Captures/Exo4_1_3}
+	%\caption{}
+	\label{fig:exo413}
+\end{figure}
+
+	2. On souhaite interdire de manière automatique toute insertion d’un salaire < 500e. Proposer un déclencheur assurant cette tâche.\\
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{../Captures/Exo4_2_1}
+	%\caption{}
+	\label{fig:exo421}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Captures/Exo4_2_2}
+	%\caption{}
+	\label{fig:exo422}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{../Captures/Exo4_2_3}
+	%\caption{}
+	\label{fig:exo423}
+\end{figure}
+	
+\end{document}
